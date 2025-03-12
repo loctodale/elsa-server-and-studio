@@ -8,6 +8,7 @@
     <PackageReference Include="Elsa" Version="3.0.3" />
     <PackageReference Include="Elsa.CSharp" Version="3.0.3" />
     <PackageReference Include="Elsa.EntityFrameworkCore" Version="3.0.3" />
+    <PackageReference Include="Elsa.EntityFrameworkCore.MySql" Version="3.0.3" />
     <PackageReference Include="Elsa.EntityFrameworkCore.Sqlite" Version="3.0.3" />
     <PackageReference Include="Elsa.Identity" Version="3.0.3" />
     <PackageReference Include="Elsa.JavaScript" Version="3.0.3" />

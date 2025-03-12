@@ -2,8 +2,6 @@ using Elsa.EntityFrameworkCore.Extensions;
 using Elsa.EntityFrameworkCore.Modules.Management;
 using Elsa.EntityFrameworkCore.Modules.Runtime;
 using Elsa.Extensions;
-using Elsa.Persistence.EntityFramework.Core.Extensions;
-using Elsa.Persistence.EntityFramework.MySql;
 using Microsoft.EntityFrameworkCore;
 
 using Microsoft.AspNetCore.Mvc;
