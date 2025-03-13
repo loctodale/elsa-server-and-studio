@@ -1,5 +1,5 @@
 services:
-  ElsaDatabase:
+  elsa-database:
     image: mysql:8.0
     container_name: elsa-database
     ports:
@@ -9,3 +9,18 @@ services:
       MYSQL_DATABASE: elsa_database
       MYSQL_USER: elsa_user
       MYSQL_PASSWORD: elsa_pass
+  
+  elsa-server:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+    image: loctodaleservice/elsa-server
+    ports:
+      - "5001:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - HTTP_PORTS = 8080
+      - HTTP__BASEURL = http://localhost:5001
+#    volumes:
+#      - ./ElsaServer/appsettings.json:/app/appsettings.json
+    restart: always

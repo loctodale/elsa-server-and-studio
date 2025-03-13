@@ -23,7 +23,7 @@ services
         })
         .UseDefaultAuthentication()
         .UseWorkflowManagement(management => management.UseEntityFrameworkCore(ef =>
-            ef.UseMySql("Server=localhost;Port=30306;Database=elsa_database;Uid=elsa_user;Pwd=elsa_pass;")))
+            ef.UseMySql("Server=elsa-database;Port=3306;Database=elsa_database;Uid=elsa_user;Pwd=elsa_pass;")))
         .UseWorkflowRuntime(runtime => runtime.UseEntityFrameworkCore())
         .UseScheduling()
         .UseJavaScript()
