@@ -2,11 +2,13 @@ using Elsa.EntityFrameworkCore.Extensions;
 using Elsa.EntityFrameworkCore.Modules.Management;
 using Elsa.EntityFrameworkCore.Modules.Runtime;
 using Elsa.Extensions;
+using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers(); 
 builder.WebHost.UseStaticWebAssets();
 
 var services = builder.Services;
@@ -45,6 +47,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+// app.UseFastEndpoints();
 app.UseHttpsRedirection();
 app.UseBlazorFrameworkFiles();
 app.UseRouting();
@@ -55,5 +58,6 @@ app.UseAuthorization();
 app.UseWorkflowsApi();
 app.UseWorkflows();
 app.UseWorkflowsSignalRHubs();
+app.MapControllers();
 app.MapFallbackToPage("/_Host");
 app.Run();
