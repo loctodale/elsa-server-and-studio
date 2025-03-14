@@ -2,6 +2,9 @@ using Elsa.EntityFrameworkCore.Extensions;
 using Elsa.EntityFrameworkCore.Modules.Management;
 using Elsa.EntityFrameworkCore.Modules.Runtime;
 using Elsa.Extensions;
+using ElsaServer.Config;
+using ElsaServer.Context;
+using ElsaServer.CustomActivity;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +16,7 @@ builder.WebHost.UseStaticWebAssets();
 
 var services = builder.Services;
 var configuration = builder.Configuration;
-
+services.AddScoped<CreateIdeaActivity>();
 services
     .AddElsa(elsa => elsa
         .UseIdentity(identity =>
@@ -38,7 +41,10 @@ services
 
 services.AddCors(cors => cors.AddDefaultPolicy(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().WithExposedHeaders("*")));
 services.AddRazorPages(options => options.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute()));
+services.AddAutoMapper(typeof(MappingProfile));
 
+services.AddDbContext<MyDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())

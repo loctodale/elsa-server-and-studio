@@ -95,7 +95,7 @@ public partial class MyDbContext : DbContext
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json")
             .Build();
-         optionsBuilder.UseNpgsql(configuration.GetSection("ConnectionStrings").Value);
+         optionsBuilder.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
