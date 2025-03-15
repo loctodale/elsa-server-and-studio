@@ -9,5 +9,6 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<IdeaModel, Idea>().ReverseMap();
+        CreateMap<IdeaRequestModel, IdeaRequest>().ReverseMap();
     }
 }

@@ -26,6 +26,7 @@ services
         })
         .UseDefaultAuthentication()
         .UseWorkflowManagement(management => management.UseEntityFrameworkCore(ef =>
+            // ef.UseMySql(builder.Configuration.GetConnectionString("GoogleCloudMySql"))))
             ef.UseMySql("Server=elsa-database;Port=3306;Database=elsa_database;Uid=elsa_user;Pwd=elsa_pass;")))
         .UseWorkflowRuntime(runtime => runtime.UseEntityFrameworkCore())
         .UseScheduling()
@@ -42,7 +43,7 @@ services
 services.AddCors(cors => cors.AddDefaultPolicy(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().WithExposedHeaders("*")));
 services.AddRazorPages(options => options.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute()));
 services.AddAutoMapper(typeof(MappingProfile));
-
+services.AddHttpClient();
 services.AddDbContext<MyDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 var app = builder.Build();

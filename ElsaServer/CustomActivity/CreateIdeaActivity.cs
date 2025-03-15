@@ -18,7 +18,8 @@ public class CreateIdeaActivity : Activity
     public Input<IdeaModel> IdeaRequest { get; set; }
     
     // Output
-    public Output<Guid> Result { get; set; } = default!;
+    public Output<Guid> IdeaId { get; set; } = default!;
+    public Output<Guid?> ReviewerId { get; set; } = default!;
     
     protected override async ValueTask ExecuteAsync(ActivityExecutionContext context)
     {
@@ -41,13 +42,14 @@ public class CreateIdeaActivity : Activity
             
             _dbContext.Ideas.Add(ideas);
             await _dbContext.SaveChangesAsync();
-            Console.WriteLine("Save idea success");
-            Result.Set(context, ideas.Id);
+            
+            // Set output
+            IdeaId.Set(context, ideas.Id);
+            ReviewerId.Set(context, ideas.MentorId);
         }
         catch (Exception e)
         {
             Console.WriteLine($"Error: {e.Message}");
-            await context.CancelActivityAsync();
         }
         await context.CompleteActivityAsync();
 
